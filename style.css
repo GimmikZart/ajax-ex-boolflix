@@ -5,3 +5,31 @@
   margin: 0;
   box-sizing: border-box;
 }
+ul {
+  list-style: none;
+}
+
+#search-bar {
+  width: 10%;
+  background-color: rgb(31, 95, 126);
+  padding: 10px;
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+#lista-film {
+  width: 80%;
+  height: 80vh;
+  margin: 0 auto;
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#lista-film .entry {
+  width: calc(100% / 6);
+  border: 1px solid red;
+  padding: 5px;
+}

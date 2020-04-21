@@ -2,9 +2,42 @@
 <html lang="it" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <title>Boolfix</title>
   </head>
   <body>
 
+    <section id="search-bar">
+      <input type="text" name="" value="" id="filtro-utente">
+      <button type="button" name="button" id="bottone"> CERCA</button>
+    </section>
+
+
+    <main id="lista-film">
+
+      <!-- QUI VANNO APPESI I FILM CON HANDLEBARS -->
+
+    </main>
+
+    <script id="script-lista-film" type="text/x-handlebars-template">
+      <div class="entry">
+        <h1>{{titolo}}</h1>
+        <div class="lista">
+          <ul>
+            <li>Titolo originale: {{titoloOriginale}}</li>
+            <li>Lingua: {{lingua}}</li>
+            <li>Voto: {{voto}}</li>
+          </ul>
+        </div>
+      </div>
+    </script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="main.js">
+    </script>
   </body>
 </html>
