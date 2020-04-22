@@ -1,4 +1,6 @@
-
+//
+// Trasformiamo il voto da 1 a 10 decimale in un numero intero da 1 a 5, così da permetterci di stampare a schermo un numero di stelle piene che vanno da 1 a 5, lasciando le restanti vuote (troviamo le icone in FontAwesome).
+// Arrotondiamo sempre per eccesso all’unità successiva, non gestiamo icone mezze piene
 
 
 
@@ -22,22 +24,11 @@ $(document).ready(function(){
       type: "GET",
       dataType: "json",
       success: function (data,stato) {
-          var listaFilm = data.results;
-          for (i = 0 ; i < listaFilm.length ; i++ ){
-            var titolo = listaFilm[i].title;
-            var titoloOriginale = listaFilm[i].original_title;
-            var lingua = listaFilm[i].original_language;
-            var voto = listaFilm[i].vote_average;
-            var context = { titolo: titolo,
-                                titoloOriginale: titoloOriginale,
-                                lingua:lingua,
-                                voto: voto,
-                                tipo: "Film"
-                              };
-            var html = template(context);
 
-            $("#lista-film").append(html);
-          } // fine ciclo for
+          // la lista sono film
+
+          aggiungiElementi(data.results, 0);
+
         }, // fine attributo success
       error: function (error) {
           console.log("Error ${error}");
@@ -56,27 +47,113 @@ $(document).ready(function(){
       type: "GET",
       dataType: "json",
       success: function (data,stato) {
-          var listaFilm = data.results;
-          for (i = 0 ; i < listaFilm.length ; i++ ){
-            var titolo = listaFilm[i].name;
-            var titoloOriginale = listaFilm[i].original_name;
-            var lingua = listaFilm[i].original_language;
-            var voto = listaFilm[i].vote_average;
-            var context = {
-                            titolo: titolo,
-                            titoloOriginale: titoloOriginale,
-                            lingua:lingua,
-                            voto: voto,
-                            tipo: "serie TV"
-                          };
-            var html = template(context);
 
-            $("#lista-film").append(html);
-          } // fine ciclo for
+          // la lista sono serie tv
+
+            aggiungiElementi(data.results, 1);
+
         }, // fine attributo success
       error: function (error) {
           console.log("Error ${error}");
       },// fine attributo error
     });
   });
+
+  // tipologiaElemento : indica la tipologia degli elementi presenti in listaFilm
+  // se vale 0 -> è un FILM
+  // se vale 1 -> è una SERIE TV
+  function aggiungiElementi(listaElementi, tipologiaElemento) {
+
+    for (var i = 0 ; i < listaElementi.length ; i++ ){
+
+      // FILM
+      // title
+      // original_title
+
+      // Serie tv
+      // name
+      // original_name
+
+      var elemento = listaElementi[i];
+
+      console.log("indice del film", i);
+
+      // console.log(elemento);
+
+      var titolo = "";
+      var titoloOriginale = "";
+      var tipoElemento = "";
+
+      if (tipologiaElemento === 0) {
+        titolo = elemento.title;
+        titoloOriginale = elemento.original_title;
+        tipoElemento = "FILM";
+      } else {
+        titolo = elemento.name;
+        titoloOriginale = elemento.original_name;
+        tipoElemento = "SERIE TV";
+      }
+
+      var lingua = elemento.original_language;
+      var voto = elemento.vote_average;
+      // sezione stelle
+      var votoApprossimato = Math.ceil(voto / 2);
+
+      // abbino i contesti
+      var context = {
+                      titolo: titolo,
+                      titoloOriginale: titoloOriginale,
+                      lingua:lingua,
+                      voto: voto,
+                      tipo: tipoElemento,
+                      stelle: generaStelle(votoApprossimato),
+                    };
+      // creo variabile da appendere
+      var html = template(context);
+      // appendo l'html
+      $("#lista-film").append(html);
+    } // fine ciclo for
+  }
+
+  function generaStelle(culo){
+    var stelleFinali = "";
+
+    for (var i = 0; i < culo; i++ ){
+      stelleFinali = stelleFinali + "<i class='fas fa-star'></i>";
+    }
+    for (var i = 0 ; i < 5 - culo ; i++){
+      stelleFinali += "<i class='far fa-star'></i>";
+    }
+    return stelleFinali;
+  }
+
 });
+
+
+
+
+
+
+// FUNZIONI GENERALI
+
+// function cercaElemento(a,b){
+//   var listaFilm = data.results;
+//   for (i = 0 ; i < listaFilm.length ; i++ ){
+//     var titolo = a;
+//     var titoloOriginale = b;
+//     var lingua = listaFilm[i].original_language;
+//     var voto = listaFilm[i].vote_average;
+//     var context = { titolo: titolo,
+//                         titoloOriginale: titoloOriginale,
+//                         lingua:lingua,
+//                         voto: voto,
+//                         tipo: "Film"
+//                       };
+//     var html = template(context);
+//
+//     $("#lista-film").append(html);
+//   } // fine ciclo for
+// }
+
+
+// FUNZIONI GENERALI

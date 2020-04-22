@@ -20,7 +20,7 @@ ul {
 
 #lista-film {
   width: 80%;
-  height: 80vh;
+  height: auto;
   margin: 0 auto;
   border: 2px solid black;
   display: flex;
@@ -33,3 +33,9 @@ ul {
   border: 1px solid red;
   padding: 5px;
 }
+
+
+/*
+var titolo = listaFilm[i].name;
+var titoloOriginale = listaFilm[i].original_name;
+*/
