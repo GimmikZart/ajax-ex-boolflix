@@ -6,13 +6,28 @@
 
 
 $(document).ready(function(){
+
   var source = $("#script-lista-film").html();
   var template = Handlebars.compile(source);
 
+  $("#filtro-utente").on("keyup",function() {
+
+    eseguiRicerca();
+  });// fine evento keyup
+
   $("#bottone").on("click",function() {
+
+    eseguiRicerca();
+  });// fine evento click
+
+// FUNZIONI PRINCIPALI -----------------------------------------------------------
+
+  // FUNZIONE PER CHIAMATE AJAX
+  function eseguiRicerca() {
+
     $("#lista-film").html("");
     var filtroUtente = $("#filtro-utente").val();
-    // CHIAMATA AJAX PER FILM
+    // chiamata AJAX per film
     $.ajax({
       url: 'https://api.themoviedb.org/3/search/movie',
       data: {
@@ -20,22 +35,21 @@ $(document).ready(function(){
           language: 'it-IT',
           query: filtroUtente,
           page: 1
-        },
+        }, // fine attributo data
       type: "GET",
       dataType: "json",
       success: function (data,stato) {
-
-          // la lista sono film
 
           aggiungiElementi(data.results, 0);
 
         }, // fine attributo success
       error: function (error) {
-          console.log("Error ${error}");
+          funzioneErrore(error);
       },// fine attributo error
-    });
+    }); // fine chiamata ajax per film
 
-    // CHIAMATA AJAX PER SERIE
+
+    // chiamata ajax per serie tv
     $.ajax({
       url: 'https://api.themoviedb.org/3/search/tv',
       data: {
@@ -43,29 +57,29 @@ $(document).ready(function(){
           language: 'it-IT',
           query: filtroUtente,
           page: 1
-        },
+        }, // fine attributo data
       type: "GET",
       dataType: "json",
       success: function (data,stato) {
-
-          // la lista sono serie tv
 
             aggiungiElementi(data.results, 1);
 
         }, // fine attributo success
       error: function (error) {
-          console.log("Error ${error}");
+          funzioneErrore(error);
       },// fine attributo error
-    });
-  });
+    }); // fine chiamata ajax per serie tv
+  } // FINE FUNZIONE DI RICERCA
 
-  // tipologiaElemento : indica la tipologia degli elementi presenti in listaFilm
-  // se vale 0 -> è un FILM
-  // se vale 1 -> è una SERIE TV
 
-// FUNZIONI GENERALI
+  // FUNZIONI SECONDARIE ---------------------------------------------------------------------------------------
 
-// funzione per appendere nuovi elementi serie o film
+  // funzione funzioneErrore
+  function funzioneErrore(error){
+    console.log("Error", error);
+  }
+
+  // funzione per appendere nuovi elementi serie o film
   function aggiungiElementi(listaElementi, tipologiaElemento) {
 
     for (var i = 0 ; i < listaElementi.length ; i++ ){
@@ -84,7 +98,7 @@ $(document).ready(function(){
         titolo = elemento.name;
         titoloOriginale = elemento.original_name;
         tipoElemento = "SERIE TV";
-      }
+      } // fine ciclo if
 
       var linguaOriginale = elemento.original_language;
       var voto = elemento.vote_average;
@@ -103,34 +117,33 @@ $(document).ready(function(){
                       voto: voto,
                       tipo: tipoElemento,
                       stelle: generaStelle(votoApprossimato),
-                    };
+                    }; // fine variabile context
       // creo variabile da appendere
       var html = template(context);
       // appendo l'html
       $("#lista-film").append(html);
     } // fine ciclo for
-  }//fine funzione
+  }//fine funzione aggiungiElementi
 
-// ----------------------------------------------------------------------------------------------
+
+  // FUNZIONI TERZIARIE --------------------------------------------------------------------------------
 
   // funzione per generare le stelle di valutazione
-
   function generaStelle(voto){
     var stelleFinali = "";
 
     for (var i = 0; i < voto; i++ ){
       stelleFinali = stelleFinali + "<i class='fas fa-star'></i>";
     }
-    for (var i = 0 ; i < 5 - voto ; i++){
+    for (var j = 0 ; j < 5 - voto ; j++){
       stelleFinali += "<i class='far fa-star'></i>";
     }
     return stelleFinali;
-  }
+  } // fine funzione generaStelle
 
-// -------------------------------------------------------------------------------------------------
+
 
   //funzione per generare le bandierine lingua
-
   function generaBandiera(lingua){
     var bandiera = "";
 
@@ -139,53 +152,26 @@ $(document).ready(function(){
     for (var i = 0; i < arrayLingue.length; i++){
       if (arrayLingue.includes(lingua)){
         bandiera = "<img src='img/" + lingua + ".png'>";
-        console.log(arrayLingue[i]);
       } else {
         bandiera = lingua.toUpperCase();
-        console.log(arrayLingue[i]);
       }
-
-      console.log(bandiera);
     }
-
-
     return bandiera;
-  }
+  }// fine funzione generaBandiere
+
 
   // funzione per generare le copertine
-
   function generaCopertina(poster){
-    var immagineFinale = "<img src='https://image.tmdb.org/t/p/w154" + poster + "'" + "alt='immagine non disponibile'>" ;
+
+    var immagineFinale = "";
+
+    if (poster != null){
+      immagineFinale = "<img src='https://image.tmdb.org/t/p/w154" + poster + "'" + "alt='immagine non disponibile'>" ;
+    } else {
+      immagineFinale = '<img src="" alt="">';
+    } // fine ciclo if
     return immagineFinale;
-  }
-
-});
+  }// fine funzione generaCopertina
 
 
-
-
-
-
-// FUNZIONI GENERALI
-
-// function cercaElemento(a,b){
-//   var listaFilm = data.results;
-//   for (i = 0 ; i < listaFilm.length ; i++ ){
-//     var titolo = a;
-//     var titoloOriginale = b;
-//     var lingua = listaFilm[i].original_language;
-//     var voto = listaFilm[i].vote_average;
-//     var context = { titolo: titolo,
-//                         titoloOriginale: titoloOriginale,
-//                         lingua:lingua,
-//                         voto: voto,
-//                         tipo: "Film"
-//                       };
-//     var html = template(context);
-//
-//     $("#lista-film").append(html);
-//   } // fine ciclo for
-// }
-
-
-// FUNZIONI GENERALI
+}); // FINE DOCUMENT READY
