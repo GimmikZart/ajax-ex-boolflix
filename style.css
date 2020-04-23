@@ -4,35 +4,118 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: sans-serif;
 }
 ul {
   list-style: none;
 }
 
-#search-bar {
-  width: 10%;
-  background-color: rgb(31, 95, 126);
-  padding: 10px;
+@font-face {
+	font-family: 'ForgottenFuturistShadow';
+	src: url('font/netflix/ForgottenFuturistShadow.eot');
+	src: url('font/netflix/ForgottenFuturistShadow.eot?#iefix') format('embedded-opentype'),
+		url('font/netflix/ForgottenFuturistShadow.woff') format('woff'),
+		url('font/netflix/ForgottenFuturistShadow.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+
+/* HEADER  */
+
+header {
   margin: 0 auto;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color:#B4131D;
+}
+
+#logo {
+  font-family: "ForgottenFuturistShadow", sans-serif;
+  font-size: 70px;
+
+}
+#search-bar {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+#bottone {
+    height: 50px;
+    width: 100px;
+    font-family: sans-serif;
+    font-weight: bold;
+    border: none;
+}
+
+#filtro-utente {
+  border: none;
+  width: 300px;
+  height: 50px;
+  box-shadow: inset 0px 0px 10px 3px #656565;
+  font-size: 25px;
 }
 
 #lista-film {
-  width: 80%;
   height: auto;
-  margin: 0 auto;
   border: 2px solid black;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0 20px;
 }
 
 #lista-film .entry {
-  width: calc(100% / 6);
-  border: 1px solid red;
+  width: calc((100% / 6) - 1%);
+  height: auto;
   padding: 5px;
+  margin: 0.25% 0.5%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(18, 17, 17, 1));
 }
+
+/* MAIN */
+
+body {
+  background-color: #141414;
+}
+
+/* BOX HANDLEBARS */
+
+.entry h1 {
+  color: white;
+  font-size: 30px;
+  text-align: center;
+}
+
+.lista {
+  text-align: center;
+  color: white;
+}
+
+.lista .fa-star {
+  color: #B4131D;
+}
+
+.lista li {
+  margin: 10px 0;
+}
+
+
+
+#lingua {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#lingua img {
+  width: 30px;
+  height: auto;
+  margin-left: 10px;
+}
+
 
 
 /*

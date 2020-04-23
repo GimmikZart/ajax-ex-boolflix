@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Forgotten Futurist Shadow';
+    src: url('ForgottenFuturistShadow.eot');
+    src: url('ForgottenFuturistShadow.eot?#iefix') format('embedded-opentype'),
+        url('ForgottenFuturistShadow.woff') format('woff'),
+        url('ForgottenFuturistShadow.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+

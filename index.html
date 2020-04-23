@@ -8,11 +8,16 @@
     <title>Boolfix</title>
   </head>
   <body>
+    <header>
+      <!-- A SINISTRA -->
+      <img src="img/LOGO.png" alt="">
+      <!-- A DESTRA -->
+      <section id="search-bar">
+        <input type="text" name="" value="" id="filtro-utente" placeholder="Cerca nel catalogo..">
+        <button type="button" name="button" id="bottone"> CERCA</button>
+      </section>
+    </header>
 
-    <section id="search-bar">
-      <input type="text" name="" value="" id="filtro-utente">
-      <button type="button" name="button" id="bottone"> CERCA</button>
-    </section>
 
 
     <main id="lista-film">
@@ -26,8 +31,9 @@
         <h1>{{titolo}}</h1>
         <div class="lista">
           <ul>
+            <li>{{{copertina}}}</li>
             <li>Titolo originale: {{titoloOriginale}}</li>
-            <li>Lingua: {{lingua}}</li>
+            <li id="lingua">Lingua: {{{lingua}}}</li>
             <li>Voto: {{voto}}</li>
             <li>
               {{{stelle}}}
@@ -37,6 +43,8 @@
         </div>
       </div>
     </script>
+
+
 
 
 

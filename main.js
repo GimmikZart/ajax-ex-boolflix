@@ -62,23 +62,15 @@ $(document).ready(function(){
   // tipologiaElemento : indica la tipologia degli elementi presenti in listaFilm
   // se vale 0 -> è un FILM
   // se vale 1 -> è una SERIE TV
+
+// FUNZIONI GENERALI
+
+// funzione per appendere nuovi elementi serie o film
   function aggiungiElementi(listaElementi, tipologiaElemento) {
 
     for (var i = 0 ; i < listaElementi.length ; i++ ){
 
-      // FILM
-      // title
-      // original_title
-
-      // Serie tv
-      // name
-      // original_name
-
       var elemento = listaElementi[i];
-
-      console.log("indice del film", i);
-
-      // console.log(elemento);
 
       var titolo = "";
       var titoloOriginale = "";
@@ -94,16 +86,20 @@ $(document).ready(function(){
         tipoElemento = "SERIE TV";
       }
 
-      var lingua = elemento.original_language;
+      var linguaOriginale = elemento.original_language;
       var voto = elemento.vote_average;
+
+      //sezione poster
+      var copertina = elemento.poster_path;
       // sezione stelle
       var votoApprossimato = Math.ceil(voto / 2);
 
       // abbino i contesti
       var context = {
+                      copertina: generaCopertina(copertina),
                       titolo: titolo,
                       titoloOriginale: titoloOriginale,
-                      lingua:lingua,
+                      lingua: generaBandiera(linguaOriginale),
                       voto: voto,
                       tipo: tipoElemento,
                       stelle: generaStelle(votoApprossimato),
@@ -113,18 +109,50 @@ $(document).ready(function(){
       // appendo l'html
       $("#lista-film").append(html);
     } // fine ciclo for
-  }
+  }//fine funzione
 
-  function generaStelle(culo){
+// ----------------------------------------------------------------------------------------------
+
+  // funzione per generare le stelle di valutazione
+
+  function generaStelle(voto){
     var stelleFinali = "";
 
-    for (var i = 0; i < culo; i++ ){
+    for (var i = 0; i < voto; i++ ){
       stelleFinali = stelleFinali + "<i class='fas fa-star'></i>";
     }
-    for (var i = 0 ; i < 5 - culo ; i++){
+    for (var i = 0 ; i < 5 - voto ; i++){
       stelleFinali += "<i class='far fa-star'></i>";
     }
     return stelleFinali;
+  }
+
+// -------------------------------------------------------------------------------------------------
+
+  //funzione per generare le bandierine lingua
+
+  function generaBandiera(lingua){
+    var bandiera = "";
+
+    if (lingua === "en"){
+      bandiera = "<img src='img/gb.png'>"
+    } else if (lingua === "it") {
+      bandiera = "<img src='img/it.png'>"
+    } else if (lingua ==="es") {
+      bandiera = "<img src='img/es.png'>"
+    } else {
+      bandiera = lingua;
+    }
+
+    return bandiera;
+  }
+
+  // funzione per generare le copertine
+
+  function generaCopertina(poster){
+    var immagineFinale = "<img src='https://image.tmdb.org/t/p/w154" + poster + "'" + "alt='immagine non disponibile'>" ;
+    console.log(immagineFinale);
+    return immagineFinale;
   }
 
 });
