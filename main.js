@@ -134,15 +134,20 @@ $(document).ready(function(){
   function generaBandiera(lingua){
     var bandiera = "";
 
-    if (lingua === "en"){
-      bandiera = "<img src='img/gb.png'>"
-    } else if (lingua === "it") {
-      bandiera = "<img src='img/it.png'>"
-    } else if (lingua ==="es") {
-      bandiera = "<img src='img/es.png'>"
-    } else {
-      bandiera = lingua;
+    var arrayLingue = ["it" , "en" , "sp"];
+
+    for (var i = 0; i < arrayLingue.length; i++){
+      if (arrayLingue.includes(lingua)){
+        bandiera = "<img src='img/" + lingua + ".png'>";
+        console.log(arrayLingue[i]);
+      } else {
+        bandiera = lingua.toUpperCase();
+        console.log(arrayLingue[i]);
+      }
+
+      console.log(bandiera);
     }
+
 
     return bandiera;
   }
@@ -151,7 +156,6 @@ $(document).ready(function(){
 
   function generaCopertina(poster){
     var immagineFinale = "<img src='https://image.tmdb.org/t/p/w154" + poster + "'" + "alt='immagine non disponibile'>" ;
-    console.log(immagineFinale);
     return immagineFinale;
   }
 
