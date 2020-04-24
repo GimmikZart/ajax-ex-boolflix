@@ -111,7 +111,7 @@ $(document).ready(function(){
 
       // abbino i contesti
       var context = {
-                      copertina: generaCopertina(copertina),
+                      copertina: generaCopertina(copertina, titolo),
                       titolo: titolo,
                       titoloOriginale: titoloOriginale,
                       descrizione: descrizione,
@@ -149,7 +149,7 @@ $(document).ready(function(){
   function generaBandiera(lingua){
     var bandiera = "";
 
-    var arrayLingue = ["it" , "en" , "sp"];
+    var arrayLingue = ["it" , "en" , "es"];
 
     for (var i = 0; i < arrayLingue.length; i++){
       if (arrayLingue.includes(lingua)){
@@ -163,14 +163,16 @@ $(document).ready(function(){
 
 
   // funzione per generare le copertine
-  function generaCopertina(poster){
+  function generaCopertina(poster, titolo){
 
     var immagineFinale = "";
 
     if (poster !== null){
       immagineFinale = "<img src='https://image.tmdb.org/t/p/w342" + poster + "'" + "alt='immagine non disponibile'>" ;
+      console.log(immagineFinale);
     } else {
-      immagineFinale = '<img src="img/nondisponibile.png" alt="">';
+    immagineFinale = '<h1 id="titolo">' + titolo + '</h1>' + ' ' + '<img src="img/nondisponibile.png" alt="" id ="no-poster">';
+    console.log(immagineFinale);
     } // fine ciclo if
     return immagineFinale;
   }// fine funzione generaCopertina
