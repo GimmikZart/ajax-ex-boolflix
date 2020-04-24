@@ -20,6 +20,10 @@ ul {
 	font-style: normal;
 }
 
+.sparisci {
+  display: none;
+}
+
 
 /* HEADER  */
 
@@ -78,6 +82,12 @@ body {
   background-color: #141414;
 }
 
+#consiglio {
+  position: absolute;
+  right: 0;
+}
+
+
 /* BOX HANDLEBARS */
 
 #lista-film .entry {
@@ -119,8 +129,14 @@ body {
   z-index: 1;
   color: white;
   display: block;
-  text-align: center;
   margin: 30px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  transition: opacity 0.5s linear;
+
 }
 
 /* HOVER SUI POSTER */
@@ -142,7 +158,7 @@ body {
   left: 0;
   top: 0;
   opacity: 0;
-  transition: opacity 0.5s linear;
+  transition: opacity 0.3s linear;
   font-size: 25px;
   color: rgb(193, 193, 193);
 }
@@ -195,3 +211,37 @@ body {
 var titolo = listaFilm[i].name;
 var titoloOriginale = listaFilm[i].original_name;
 */
+
+
+
+/* MEDIA QUERY ------------------------------------------ */
+
+@media screen and (max-width: 1920px) {
+  .lista h1 {
+    color: white;
+    font-size:25px;
+    text-align: center;
+    margin: 15px;
+  }
+
+  #titolo-originale span {
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px;
+  }
+
+  #lingua img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+  }
+
+  #descrizione {
+    padding: 7px 20px;
+    font-size: 20px;
+    overflow:auto;
+    height: 33%;
+  }
+
+}

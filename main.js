@@ -13,6 +13,7 @@ $(document).ready(function(){
   $("#filtro-utente").on("keyup",function() {
 
     eseguiRicerca();
+
   });// fine evento keyup
 
   $("#bottone").on("click",function() {
@@ -20,12 +21,14 @@ $(document).ready(function(){
     eseguiRicerca();
   });// fine evento click
 
+
 // FUNZIONI PRINCIPALI -----------------------------------------------------------
 
   // FUNZIONE PER CHIAMATE AJAX
   function eseguiRicerca() {
 
     $("#lista-film").html("");
+
     var filtroUtente = $("#filtro-utente").val();
     // chiamata AJAX per film
     $.ajax({
@@ -149,7 +152,7 @@ $(document).ready(function(){
   function generaBandiera(lingua){
     var bandiera = "";
 
-    var arrayLingue = ["it" , "en" , "es"];
+    var arrayLingue = ["it" , "en" , "es", "de"];
 
     for (var i = 0; i < arrayLingue.length; i++){
       if (arrayLingue.includes(lingua)){

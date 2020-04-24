@@ -18,7 +18,7 @@
       </section>
     </header>
 
-
+    <img id="consiglio"src="img/cercatrasp.png" alt="">
 
     <main id="lista-film">
 
@@ -27,7 +27,7 @@
     </main>
 
     <script id="script-lista-film" type="text/x-handlebars-template">
-      <div class="entry">
+      <div class="entry" data-id="{{id}}">
         <div id="copertina">
           {{{copertina}}}
         </div>
@@ -40,6 +40,7 @@
             {{{stelle}}}
           </li>
           <li>Tipo: {{tipo}}</li>
+          <li class="attori"></li>
         </ul>
       </div>
     </script>
