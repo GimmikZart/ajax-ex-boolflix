@@ -102,6 +102,7 @@ $(document).ready(function(){
 
       var linguaOriginale = elemento.original_language;
       var voto = elemento.vote_average;
+      var descrizione = elemento.overview;
 
       //sezione poster
       var copertina = elemento.poster_path;
@@ -113,6 +114,7 @@ $(document).ready(function(){
                       copertina: generaCopertina(copertina),
                       titolo: titolo,
                       titoloOriginale: titoloOriginale,
+                      descrizione: descrizione,
                       lingua: generaBandiera(linguaOriginale),
                       voto: voto,
                       tipo: tipoElemento,
@@ -165,10 +167,10 @@ $(document).ready(function(){
 
     var immagineFinale = "";
 
-    if (poster != null){
-      immagineFinale = "<img src='https://image.tmdb.org/t/p/w154" + poster + "'" + "alt='immagine non disponibile'>" ;
+    if (poster !== null){
+      immagineFinale = "<img src='https://image.tmdb.org/t/p/w342" + poster + "'" + "alt='immagine non disponibile'>" ;
     } else {
-      immagineFinale = '<img src="" alt="">';
+      immagineFinale = '<img src="img/nondisponibile.png" alt="">';
     } // fine ciclo if
     return immagineFinale;
   }// fine funzione generaCopertina

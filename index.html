@@ -28,19 +28,19 @@
 
     <script id="script-lista-film" type="text/x-handlebars-template">
       <div class="entry">
-        <h1>{{titolo}}</h1>
-        <div class="lista">
-          <ul>
-            <li>{{{copertina}}}</li>
-            <li>Titolo originale: {{titoloOriginale}}</li>
-            <li id="lingua">Lingua: {{{lingua}}}</li>
-            <li>Voto: {{voto}}</li>
-            <li>
-              {{{stelle}}}
-            </li>
-            <li>Tipo: {{tipo}}</li>
-          </ul>
+        <div id="copertina">
+          {{{copertina}}}
         </div>
+        <ul class="lista">
+          <li><h1>{{titolo}}</h1></li>
+          <li id="titolo-originale">Titolo originale: <br> <span>{{titoloOriginale}}</span></li>
+          <li id="descrizione"> {{descrizione}} </li>
+          <li id="lingua">{{{lingua}}}</li>
+          <li id="voto">
+            {{{stelle}}}
+          </li>
+          <li>Tipo: {{tipo}}</li>
+        </ul>
       </div>
     </script>
 
